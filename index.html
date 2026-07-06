@@ -76,11 +76,6 @@
     background:linear-gradient(180deg,rgba(255,158,77,0) 0%,var(--glow,rgba(255,158,77,.2)) 100%);
     pointer-events:none;
   }
-  .vignette{
-    position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:radial-gradient(120% 90% at 50% 30%,transparent 60%,rgba(0,0,0,.28) 100%);
-  }
-
   .wrap{
     position:relative;
     min-height:100dvh;
@@ -262,7 +257,6 @@
   <g id="moon-g"></g>
 </svg></div>
 <div class="glow" id="glow"></div>
-<div class="vignette"></div>
 
 <div class="wrap">
   <div class="top">
@@ -766,7 +760,7 @@ function paintSky(){
       }
     }
   }
-  const mute=wx.ok?(WX_MUTE[wx.cls]||WX_MUTE.clear):WX_MUTE.clear;
+  const mute=WX_MUTE.clear;   // 空は天気に関わらず澄んだ描画に固定（天気は表示・コメント・通知でのみ反映）
   const c=[0,1,2,3].map(i=>{
     let col=mixRGB(hex2rgb(a.c[i]),hex2rgb(b.c[i]),t);
     col=mixRGB(col,mute.g,mute.k);           // 天気で鈍らせる
