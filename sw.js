@@ -1,5 +1,5 @@
 // たいよう｜Twycle  オフライン用の軽量Service Worker
-const CACHE = "taiyo-v29";
+const CACHE = "taiyo-v32";
 const ASSETS = ["./", "./index.html", "./manifest.json"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));

@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0e0a22">
-<title>たいよう｜Twycle</title>
+<title>sunriset｜Twycle</title>
 
 <!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="たいよう">
+<meta name="apple-mobile-web-app-title" content="sunriset">
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2t5IiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzFjMTY0MCIvPjxzdG9wIG9mZnNldD0iMC41IiBzdG9wLWNvbG9yPSIjN2IzZjYzIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmY5YTUyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxjbGlwUGF0aCBpZD0iciI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTIiLz48L2NsaXBQYXRoPgo8L2RlZnM+CjxnIGNsaXAtcGF0aD0idXJsKCNyKSI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSJ1cmwoI3NreSkiLz4KPGNpcmNsZSBjeD0iMjU2IiBjeT0iMzAwIiByPSIxMTYiIGZpbGw9IiNmZmU3YWQiLz4KPHJlY3QgeT0iMzAwIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjIxMiIgZmlsbD0iI2Q2NWYzZSIvPgo8L2c+Cjwvc3ZnPgo=">
 
 <!-- 明朝体：黄昏の声 -->
@@ -37,13 +37,15 @@
     background:#0e0a22;
     min-height:100dvh;
     overflow-x:hidden;
+    overscroll-behavior-y:none;
   }
 
   /* ---- 空（JSが毎秒、連続補間で塗る） ---- */
-  .sky{position:fixed;inset:0;z-index:-4}
-  canvas#stars{position:fixed;inset:0;z-index:-3;pointer-events:none}
+  #bg{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100lvh;z-index:-2;overflow:hidden;pointer-events:none}
+  .sky{position:absolute;inset:0}
+  canvas#stars{position:absolute;inset:0;pointer-events:none}
   .sun{
-    position:fixed;left:50%;bottom:-30%;z-index:-2;
+    position:absolute;left:50%;bottom:-30%;
     width:140px;height:140px;border-radius:50%;
     transform:translate(-50%,50%);
     background:radial-gradient(circle,#fff3cf 0%,#ffcf7e 42%,#ff9e4d 60%,rgba(255,158,77,0) 74%);
@@ -57,7 +59,7 @@
     50%{filter:blur(1.5px) brightness(1.14)}
   }
   .moon{
-    position:fixed;left:50%;bottom:-30%;z-index:-2;
+    position:absolute;left:50%;bottom:-30%;
     width:72px;height:72px;
     transform:translate(-50%,50%);
     opacity:0;transition:opacity 3.5s ease;
@@ -72,7 +74,7 @@
     50%{filter:brightness(1.12)}
   }
   .glow{
-    position:fixed;left:0;right:0;bottom:0;height:34vh;z-index:-2;
+    position:absolute;left:0;right:0;bottom:0;height:34vh;
     background:linear-gradient(180deg,rgba(255,158,77,0) 0%,var(--glow,rgba(255,158,77,.2)) 100%);
     pointer-events:none;
   }
@@ -247,6 +249,7 @@
 </style>
 </head>
 <body>
+<div id="bg">
 <div class="sky" id="sky"></div>
 <canvas id="stars"></canvas>
 <div class="sun" id="sun"></div>
@@ -257,6 +260,7 @@
   <g id="moon-g"></g>
 </svg></div>
 <div class="glow" id="glow"></div>
+</div>
 
 <div class="wrap">
   <div class="top">
@@ -951,14 +955,21 @@ function wagoNow(){
 const cv=$("stars"),ctx=cv.getContext("2d");
 let stars=[];
 function initSkyParticles(){
-  cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;
+  const bg=document.getElementById("bg");
+  cv.width=(bg?bg.clientWidth:innerWidth)*devicePixelRatio;
+  cv.height=(bg?bg.clientHeight:innerHeight)*devicePixelRatio;
   stars=Array.from({length:130},()=>({
     x:Math.random(),y:Math.random()*0.75,
     r:(Math.random()*1.1+0.4)*devicePixelRatio,
     ph:Math.random()*Math.PI*2, sp:Math.random()*0.9+0.3
   }));
 }
-addEventListener("resize",initSkyParticles);
+addEventListener("resize",()=>{
+  const bg=document.getElementById("bg");
+  const nw=(bg?bg.clientWidth:innerWidth)*devicePixelRatio;
+  const nh=(bg?bg.clientHeight:innerHeight)*devicePixelRatio;
+  if(nw!==cv.width||nh!==cv.height) initSkyParticles();
+});
 function drawSkyParticles(ts){
   ctx.clearRect(0,0,cv.width,cv.height);
   if(starAlpha>0.02){
