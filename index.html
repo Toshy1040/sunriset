@@ -89,7 +89,7 @@
   .place{font-size:11.5px;color:var(--ink-faint);text-align:right;max-width:55%}
 
   .now{
-    margin-top:16px;text-align:center;
+    margin-top:18px;text-align:center;
     text-shadow:0 1px 14px rgba(0,0,0,.35);
     font-size:14.5px;color:var(--ink-dim);
     letter-spacing:.05em;font-variant-numeric:tabular-nums;
@@ -99,7 +99,7 @@
   .now .sep{opacity:.3;margin:0 .6em}
   .now .clk{font-weight:600;color:var(--ink)}
   .sekki{
-    margin-top:9px;text-align:center;
+    margin-top:12px;text-align:center;
     text-shadow:0 1px 12px rgba(0,0,0,.3);
     font-family:var(--mincho);font-size:11.5px;
     letter-spacing:.24em;text-indent:.24em;
@@ -107,7 +107,7 @@
   }
   .sekki b{font-weight:600;color:var(--ink-dim)}
   .wago{
-    margin-top:12px;text-align:center;
+    margin-top:15px;text-align:center;
     text-shadow:0 1px 12px rgba(0,0,0,.3);
     font-family:var(--mincho);color:var(--ink-dim);
     font-size:15px;letter-spacing:.3em;text-indent:.3em;
@@ -118,12 +118,12 @@
     color:var(--ink-faint);
   }
   .wx{
-    margin-top:10px;text-align:center;
+    margin-top:13px;margin-bottom:18px;text-align:center;
     font-family:var(--mincho);font-size:12px;letter-spacing:.08em;
     color:var(--ink-faint);min-height:1em;
   }
 
-  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:12px 0}
+  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:16px 0}
   .eyebrow{
     font-family:var(--mincho);font-size:14px;color:var(--ink-dim);
     letter-spacing:.14em;margin-bottom:9px;
@@ -136,44 +136,44 @@
     text-shadow:0 2px 30px rgba(0,0,0,.25);
   }
   .count .u{font-family:var(--mincho);font-size:.3em;font-weight:500;color:var(--ink-dim);letter-spacing:.05em}
-  .target{margin-top:12px;font-family:var(--mincho);font-size:16px;color:var(--ink);line-height:1.6}
+  .target{margin-top:16px;font-family:var(--mincho);font-size:16px;color:var(--ink);line-height:1.6}
   .target b{font-weight:700}
   .at{color:var(--ink-dim);font-size:15px}
 
-  .times{display:flex;gap:12px;margin-top:18px}
+  .times{display:flex;gap:12px;margin-top:22px}
   .t{
     flex:1;background:rgba(255,245,234,.055);border:1px solid var(--line);
-    border-radius:16px;padding:9px 14px 10px;
+    border-radius:16px;padding:12px 14px 13px;
   }
   .t .lab{font-family:var(--mincho);font-size:11px;color:var(--ink-dim);letter-spacing:.1em;margin-bottom:4px}
   .t .val{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums}
   .t.now-evt{border-color:rgba(255,178,77,.5);box-shadow:0 0 22px rgba(255,158,77,.12),0 0 0 1px rgba(255,178,77,.2) inset}
 
   .mtimes{
-    margin-top:9px;text-align:center;
+    margin-top:12px;text-align:center;
     font-family:var(--mincho);font-size:12.5px;
     letter-spacing:.1em;color:var(--ink-dim);
     min-height:1em;
   }
   .mtimes .d2{color:var(--ink-faint);font-size:11px;margin:0 .15em}
   .mname{
-    margin-top:6px;text-align:center;
+    margin-top:9px;margin-bottom:50px;text-align:center;
     font-family:var(--mincho);font-size:12px;
     letter-spacing:.16em;color:var(--ink-faint);min-height:1em;
   }
   .mname b{font-weight:600;color:var(--ink-dim)}
   .mutter{
     margin-top:12px;
-    background:rgba(255,245,234,.055);border:1px solid var(--line);
-    border-radius:16px;padding:11px 15px 12px;
+    background:rgba(255,245,234,.055);border:1px solid rgba(255,178,77,.42);
+    border-radius:16px;padding:14px 15px 15px;
     user-select:none;
   }
   .cmt-btn{
-    display:block;width:100%;margin-top:7px;
-    padding:8px;border-radius:12px;
+    display:block;width:100%;margin-top:12px;
+    padding:10px;border-radius:12px;
     background:rgba(255,245,234,.04);
-    color:rgba(255,190,120,.92);
-    border:1px solid rgba(255,178,77,.42);
+    color:rgba(255,178,77,.42);
+    border:1px solid var(--line);
     font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.08em;
     cursor:pointer;transition:transform .12s ease,opacity .2s,background .2s;
   }
@@ -195,7 +195,7 @@
   .hint{font-size:12px;color:var(--ink-faint);line-height:1.7;margin-top:2px}
   .hint b{color:var(--ink-dim);font-weight:600}
   .gear{
-    display:block;margin:16px auto 0;padding:7px 18px;
+    display:block;margin:12px auto 0;padding:7px 18px;
     background:none;border:none;backdrop-filter:none;
     font-family:var(--mincho);font-size:11px;letter-spacing:.24em;text-indent:.24em;
     color:rgba(255,245,234,.32);cursor:pointer;
@@ -231,7 +231,7 @@
     background:var(--card);border:1px solid var(--line);border-radius:14px;
   }
   .credit{
-    margin-top:26px;text-align:center;
+    margin-top:28px;text-align:center;
     font-size:10px;letter-spacing:.26em;text-indent:.26em;
     color:rgba(255,245,234,.24);
     user-select:none;
